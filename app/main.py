@@ -34,4 +34,29 @@ class Vector:
     def get_normalized(self) -> "Vector":
         length = self.get_length()
         if length == 0:
-            return Vector(0.0, 0.
+            return Vector(0.0, 0.0)
+        return Vector(self.x / length, self.y / length)
+
+    def angle_between(self, vector: "Vector") -> int:
+        length_product = self.get_length() * vector.get_length()
+        if length_product == 0:
+            return 0
+        cos_value = (self * vector) / length_product
+        cos_value = max(-1.0, min(1.0, cos_value))
+        return round(math.degrees(math.acos(cos_value)))
+
+    def get_angle(self) -> int:
+        length = self.get_length()
+        if length == 0:
+            return 0
+        cos_value = max(-1.0, min(1.0, self.y / length))
+        return round(math.degrees(math.acos(cos_value)))
+
+    def rotate(self, degrees: int) -> "Vector":
+        radians = math.radians(degrees)
+        cos_value = math.cos(radians)
+        sin_value = math.sin(radians)
+        return Vector(
+            self.x * cos_value - self.y * sin_value,
+            self.x * sin_value + self.y * cos_value,
+        )
