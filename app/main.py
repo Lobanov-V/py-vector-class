@@ -2,6 +2,9 @@ import math
 from typing import Tuple, Union
 
 
+Point = Tuple[float, float]
+
+
 class Vector:
     def __init__(self, x_coord: float, y_coord: float) -> None:
         self.x = round(x_coord, 2)
@@ -26,8 +29,8 @@ class Vector:
     @classmethod
     def create_vector_by_two_points(
         cls,
-        start_point: Tuple[float, float],
-        end_point: Tuple[float, float],
+        start_point: Point,
+        end_point: Point,
     ) -> "Vector":
         return cls(
             end_point[0] - start_point[0],
